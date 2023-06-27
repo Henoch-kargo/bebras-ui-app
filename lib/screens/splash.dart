@@ -1,42 +1,139 @@
+import 'package:bebras_app_ui/screens/main/login_register.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  final List<String> carouselImages = [
+    'coverBebras.jpg',
+    'bebrasPandai.jpg',
+    'bannerBebras.jpg',
+  ];
+
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color(0xFF121212),
-        body: Center(
-          child: Stack(
-            children: [
-              Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: -120,
-                  top: -10,
-                  child: Image.asset('assets/splash_2.png', width: 50)),
-              Positioned(
-                  bottom: 0,
-                  left: -110,
-                  right: 0,
-                  top: 150,
-                  child: Image.asset('assets/splash_1.png', width: 50)),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                top: 0,
-                child: SvgPicture.asset(
-                  'assets/logo_white.svg',
-                  fit: BoxFit.scaleDown,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 250,
+                viewportFraction: 1.1,
+                enableInfiniteScroll: true,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 6),
+                autoPlayAnimationDuration: Duration(milliseconds: 500),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+              items: carouselImages.map((image) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 10.0),
+                      decoration: BoxDecoration(
+                        // borderRadius: BorderRadius.circular(8.0),
+                        image: DecorationImage(
+                          image: AssetImage('images/$image'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 80.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Selamat Datang di Aplikasi Pintar!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                      fontSize: 32.0,
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    'Yuk berlatih dan belajar bersama Bebras!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: carouselImages.map((image) {
+                  int index = carouselImages.indexOf(image);
+                  return Container(
+                    width: _currentIndex == index ? 28.0 : 8.0,
+                    height: 8.0,
+                    margin: EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: _currentIndex == index ? BoxShape.rectangle : BoxShape.circle,
+                      color: _currentIndex == index ? Colors.black : Colors.grey,
+                      borderRadius: _currentIndex == index ? BorderRadius.all(Radius.circular(50)) : null,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Perform action when the "Skip" button is pressed
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginRegisterScreen()),
+                );
+              },
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all<double>(0.0),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
               ),
-            ],
-          ),
+              child: Text(
+                'Skip',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  fontSize: 24.0,
+                ),
+              ),
+            ),
+            SizedBox(height: 40.0),
+          ],
         ),
       ),
     );
