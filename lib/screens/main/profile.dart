@@ -8,7 +8,6 @@ import 'package:bebras_app_ui/widgets/blank_page.dart';
 import 'package:bebras_app_ui/widgets/bottom_navbar.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
   @override

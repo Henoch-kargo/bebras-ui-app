@@ -13,7 +13,7 @@ class BlankPage extends StatelessWidget {
       children: [
         Container(
           width: MediaQuery.of(context).size.width - 30,
-          height: 80.0,
+          height: 60.0,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             image: DecorationImage(
@@ -30,7 +30,7 @@ class BlankPage extends StatelessWidget {
         SizedBox(height: 20.0),
         Container(
           width: MediaQuery.of(context).size.width - 80,
-          height: 380.0,
+          height: 350.0,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             image: DecorationImage(

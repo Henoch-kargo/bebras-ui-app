@@ -37,7 +37,7 @@ class BotNavBar extends StatelessWidget {
           child: BottomNavigationBar(
             elevation: 0,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Color(0xff0d53ff),
+            backgroundColor: Color(0xff009ee8),
             selectedItemColor: Colors.white,
             unselectedItemColor: Color(0xffababab),
             items: <BottomNavigationBarItem>[
@@ -46,11 +46,11 @@ class BotNavBar extends StatelessWidget {
                 label: 'Materi',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.quiz_rounded),
+                icon: Icon(Icons.question_answer_rounded),
                 label: 'Kuis',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_outlined),
+                icon: Icon(Icons.account_circle_rounded),
                 label: 'Akun',
               ),
             ],
