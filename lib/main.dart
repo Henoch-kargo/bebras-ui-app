@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:bebras_app_ui/screens/main/collection.dart';
+import 'package:bebras_app_ui/screens/main/profile.dart';
+import 'package:bebras_app_ui/screens/main/quiz.dart';
 import 'package:bebras_app_ui/screens/main/custom_blank_page.dart';
 import 'package:bebras_app_ui/screens/main/home.dart';
 import 'package:bebras_app_ui/screens/main/login_register.dart';
@@ -32,8 +33,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/auth': (context) => LoginRegisterScreen(),
         '/home': (context) => Home(),
-        '/profile': (context) => CustomBlankPage(onClickHome: () {Navigator.pushNamed(context, '/home');}),
-        '/collection': (context) => Collection(),
+        '/profile': (context) => Profile(),
+        '/collection': (context) => Quiz(),
         '/document/view': (context) => PdfViewerPage(file: new File('images/bannerBebras.jpg'), url: '',),
       },
       initialRoute: '/',

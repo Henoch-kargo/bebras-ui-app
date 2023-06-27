@@ -17,28 +17,28 @@ class ToggleButtonLoginRegister extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         fixedSize: MaterialStateProperty.all(Size(140, 50)),
-        // maximumSize: MaterialStateProperty.all(Size(120, 80)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: text == 'Login' ? BorderRadius.only(
-              topLeft: Radius.circular(15.0),
-              bottomLeft: Radius.circular(15.0),
+              topLeft: Radius.circular(25.0),
+              bottomLeft: Radius.circular(25.0),
             ) : BorderRadius.only(
-              topRight: Radius.circular(15.0),
-              bottomRight: Radius.circular(15.0),
+              topRight: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0),
             ),
+            side: BorderSide(color: Color(0xff0d53ff), width: 2.0),
           ),
         ),
         backgroundColor: MaterialStateProperty.all<Color>(
           isSelected
-              ? Colors.white
-              : Color(0xffCCCCCC),
+              ? Color(0xff0d53ff)
+              : Colors.white,
         ),
       ),
       child: Text(
         text,
         style: TextStyle(
-          color: isSelected ? Colors.black : Colors.grey,
+          color: isSelected ? Colors.white : Color(0xffdae4ff),
           fontSize: 22.0,
         ),
       ),

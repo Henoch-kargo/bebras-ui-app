@@ -20,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -57,12 +58,23 @@ class _SplashScreenState extends State<SplashScreen> {
                 );
               }).toList(),
             ),
-            SizedBox(height: 80.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 70.0),
+                    decoration: BoxDecoration(
+                      // borderRadius: BorderRadius.circular(8.0),
+                      image: DecorationImage(
+                        image: AssetImage('images/bebrasIndonesia.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   Text(
                     'Selamat Datang di Aplikasi Pintar!',
                     textAlign: TextAlign.center,

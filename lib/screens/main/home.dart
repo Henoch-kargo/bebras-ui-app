@@ -1,12 +1,6 @@
-import 'dart:async';
-import 'dart:math';
 import 'dart:ui';
 
-import 'package:bebras_app_ui/screens/app_layout.dart';
-import 'package:bebras_app_ui/widgets/appbar_actions_button.dart';
 import 'package:bebras_app_ui/widgets/bottom_navbar.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -56,11 +50,28 @@ class _HomeState extends State<Home> {
     return Scaffold(
       resizeToAvoidBottomInset : false,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
+        elevation: 0,
         title: Text(
-          'Pembahasan Soal',
-          style: TextStyle(color: Colors.black),
+          'Hi, Thomas!',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 24.0,
+          ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.logout,
+              color: Colors.black,
+              size: 28,
+            ),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -79,6 +90,20 @@ class _HomeState extends State<Home> {
               ],
             ),
             SizedBox(height: 32.0),
+            Row(
+              children: [
+                Text(
+                  'Kategori',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 24.0,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+            SizedBox(height: 24.0),
             _buildButtonList(),
           ],
         ),
@@ -96,12 +121,17 @@ class _HomeState extends State<Home> {
         borderRadius: BorderRadius.circular(25.0),
       ),
       child: TextField(
+        style: new TextStyle(
+            fontWeight: FontWeight.w500,
+            fontFamily: "Roboto",
+            fontStyle: FontStyle.normal,
+            fontSize: 18.0),
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.search),
           hintText: 'Cari materi...',
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(color: Color(0xffd2d2d2), width: 3.0),
+            borderSide: BorderSide(color: Color(0xffdae4ff), width: 3.0),
           ),
         ),
       ),
@@ -126,10 +156,10 @@ class _HomeState extends State<Home> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? Colors.grey : Colors.white,
+          color: isSelected ? Color(0xff5987ff) : Colors.white,
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
-            color: Colors.grey,
+            color: Color(0xff5987ff),
             width: 2.0,
           ),
         ),
@@ -137,7 +167,9 @@ class _HomeState extends State<Home> {
         child: Text(
           buttonText,
           style: TextStyle(
-            color: isSelected ? Colors.white : Colors.grey,
+            fontFamily: "Roboto",
+            fontWeight: FontWeight.w500,
+            color: isSelected ? Colors.white : Color(0xff5987ff),
             fontSize: 16.0,
           ),
         ),
@@ -161,7 +193,9 @@ class _HomeState extends State<Home> {
     return Container(
       margin: EdgeInsets.only(bottom: 8.0),
       child: ElevatedButton(
-        onPressed: () {Navigator.pushNamed(context, '/document/view');},
+        onPressed: () {Navigator.pushNamed(context, '/document/view', arguments: {
+        'name': buttonText
+        });},
         style: ElevatedButton.styleFrom(
           fixedSize: Size(double.infinity, 100),
           elevation: 0,
@@ -191,6 +225,7 @@ class _HomeState extends State<Home> {
               child: Text(
                 buttonText,
                 style: TextStyle(
+                    fontFamily: "Roboto",
                     fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     color: Color(0xff3d3d3d),

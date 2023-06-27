@@ -17,7 +17,7 @@ class BotNavBar extends StatelessWidget {
         Navigator.pushNamed(context, '/collection');
         break;
       case 2:
-          Navigator.pushNamed(context, '/favorite');
+          Navigator.pushNamed(context, '/profile');
         break;
     }
   }
@@ -33,21 +33,21 @@ class BotNavBar extends StatelessWidget {
           sigmaY: 30.0,
         ),
         child: SizedBox(
-          height: 80,
+          height: 70,
           child: BottomNavigationBar(
             elevation: 0,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: _themeData.highlightColor,
+            backgroundColor: Color(0xff0d53ff),
             selectedItemColor: Colors.white,
-            unselectedItemColor: _themeData.unselectedWidgetColor,
+            unselectedItemColor: Color(0xffababab),
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.book),
                 label: 'Materi',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.print_rounded),
-                label: 'Cetakan',
+                icon: Icon(Icons.quiz_rounded),
+                label: 'Kuis',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined),

@@ -10,9 +10,9 @@ import 'package:bebras_app_ui/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatefulWidget {
+class Quiz extends StatefulWidget {
   @override
-  _ProfileState createState() => _ProfileState();
+  _QuizState createState() => _QuizState();
 }
 
 class ButtonData {
@@ -22,8 +22,8 @@ class ButtonData {
   ButtonData(this.buttonText, this.imagePath);
 }
 
-class _ProfileState extends State<Profile> {
-  static const index = 2;
+class _QuizState extends State<Quiz> {
+  static const index = 1;
 
   @override
   void initState() {

@@ -13,8 +13,10 @@ import 'package:permission_handler/permission_handler.dart';
 class PdfViewerPage extends StatefulWidget {
   final File file;
   final String url;
+  final String FILE_PATH = '/data/user/0/com.example.bebras.bebras_app_ui/app_flutter/';
+  Map data = {};
 
-  const PdfViewerPage({
+  PdfViewerPage({
     Key? key,
     required this.file,
     required this.url,
@@ -27,11 +29,21 @@ class PdfViewerPage extends StatefulWidget {
 class _PdfViewerPageState extends State<PdfViewerPage> {
   @override
   Widget build(BuildContext context) {
-    final name = basename(widget.file.path);
+    widget.data = ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffe6f6ff),
-        title: Text(name, style: TextStyle(color: Colors.black),),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 28,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.white,
+        title: Text(widget.data['name'], style: TextStyle(color: Colors.black),),
         actions: [
           IconButton(
             onPressed: () async {
@@ -45,26 +57,24 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
                 ),
               );
             },
-            icon: const Icon(Icons.download_rounded),
+            icon: const Icon(
+              Icons.download_rounded,
+              size: 32,
+              color: Colors.black,
+            ),
           ),
         ],
       ),
       body: Stack(
         children: [
           PDFView(
-            filePath: '/data/user/0/com.example.bebras.bebras_app_ui/app_flutter/pdfAcademy.pdf',
+            filePath: '${widget.FILE_PATH}BebrasSiaga.pdf',
             onError: (error) {
               print(error.toString());
             },
             onPageError: (page, error) {
               print('$page: ${error.toString()}');
             },
-            // onViewCreated: (PDFViewController pdfViewController) {
-            //   _controller.complete(pdfViewController);
-            // },
-            // onPageChanged: (int page, int total) {
-            //   print('page change: $page/$total');
-            // },
           ),
         ],
       ),
