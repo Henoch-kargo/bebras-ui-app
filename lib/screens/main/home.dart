@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:bebras_app_ui/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class ButtonData {
 
 class _HomeState extends State<Home> {
   String _selectedButton = 'SD';
+  String test = '';
   static const index = 0;
 
   List<ButtonData> _sdButtonList = [
@@ -69,43 +71,55 @@ class _HomeState extends State<Home> {
               color: Colors.black,
               size: 28,
             ),
-            onPressed: () {},
+            onPressed: () async {
+              getImageFileFromAssets();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    test,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildSearchInput(),
-            SizedBox(height: 16.0),
-            Row(
-              children: [
-                _buildButton('SD'),
-                SizedBox(width: 8.0),
-                _buildButton('SMP'),
-                SizedBox(width: 8.0),
-                _buildButton('SMA'),
-                SizedBox(width: 16.0),
-              ],
-            ),
-            SizedBox(height: 32.0),
-            Row(
-              children: [
-                Text(
-                  'Kategori',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 24.0,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              _buildSearchInput(),
+              SizedBox(height: 16.0),
+              Row(
+                children: [
+                  _buildButton('SD'),
+                  SizedBox(width: 8.0),
+                  _buildButton('SMP'),
+                  SizedBox(width: 8.0),
+                  _buildButton('SMA'),
+                  SizedBox(width: 16.0),
+                ],
+              ),
+              SizedBox(height: 32.0),
+              Row(
+                children: [
+                  Text(
+                    'Kategori',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 24.0,
+                    ),
+                    textAlign: TextAlign.start,
                   ),
-                  textAlign: TextAlign.start,
-                ),
-              ],
-            ),
-            SizedBox(height: 24.0),
-            _buildButtonList(),
-          ],
+                ],
+              ),
+              SizedBox(height: 24.0),
+              _buildButtonList(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: const BotNavBar(
@@ -236,5 +250,14 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  Future<String> getImageFileFromAssets() async {
+    var dir = await getApplicationDocumentsDirectory();
+    setState(() {
+      test = dir as String;
+    });
+    print(dir);
+    return dir.toString();
   }
 }

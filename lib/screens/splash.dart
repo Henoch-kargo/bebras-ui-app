@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 50,
-                    margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 70.0),
+                    margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 50.0, bottom: 40.0),
                     decoration: BoxDecoration(
                       // borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(

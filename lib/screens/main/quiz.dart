@@ -58,7 +58,9 @@ class _QuizState extends State<Quiz> {
           ),
         ],
       ),
-      body: Center(child: BlankPage()),
+      body: SingleChildScrollView(
+          child: Center(child: BlankPage())
+      ),
       bottomNavigationBar: const BotNavBar(
         currentIndex: index,
       ),

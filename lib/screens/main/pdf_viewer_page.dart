@@ -4,16 +4,14 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PdfViewerPage extends StatefulWidget {
   final File file;
   final String url;
-  final String FILE_PATH = '/data/user/0/com.example.bebras.bebras_app_ui/app_flutter/';
+  final String FILE_PATH = '/data/user/0/Download/';
   Map data = {};
 
   PdfViewerPage({
@@ -27,6 +25,18 @@ class PdfViewerPage extends StatefulWidget {
 }
 
 class _PdfViewerPageState extends State<PdfViewerPage> {
+  late String? remotePDFpath;
+
+  @override
+  void initState() {
+    super.initState();
+
+    createFileOfPdfUrl().then((f) {
+      setState(() {
+        remotePDFpath = f.path;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     widget.data = ModalRoute.of(context)!.settings.arguments as Map;
@@ -67,15 +77,15 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
       ),
       body: Stack(
         children: [
-          PDFView(
-            filePath: '${widget.FILE_PATH}BebrasSiaga.pdf',
+          remotePDFpath != null ? PDFView(
+            filePath: remotePDFpath, //'${widget.FILE_PATH}BebrasSiaga.pdf',
             onError: (error) {
               print(error.toString());
             },
             onPageError: (page, error) {
               print('$page: ${error.toString()}');
             },
-          ),
+          ) : CircularProgressIndicator(),
         ],
       ),
     );
@@ -129,5 +139,28 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
       }
     }
     return false;
+  }
+
+  Future<File> createFileOfPdfUrl() async {
+    Completer<File> completer = Completer();
+    print("Start download file from internet!");
+    try {
+      final url = "http://bebras.or.id/v3/wp-content/uploads/2019/10/Bebras-Challenge-2016_Siaga.pdf";
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir = await getApplicationDocumentsDirectory();
+      print("Download files");
+      print("${dir.path}/$filename");
+      File file = File("${dir.path}/$filename");
+
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+
+    return completer.future;
   }
 }

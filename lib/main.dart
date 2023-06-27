@@ -9,7 +9,6 @@ import 'package:bebras_app_ui/screens/main/pdf_viewer_page.dart';
 import 'package:bebras_app_ui/screens/splash.dart';
 import 'package:bebras_app_ui/themes/theme_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,11 +44,5 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: '/',
     );
-  }
-
-  Future<String> getImageFileFromAssets() async {
-    var dir = await getApplicationDocumentsDirectory();
-    print(dir);
-    return dir.toString();
   }
 }

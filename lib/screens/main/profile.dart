@@ -57,7 +57,9 @@ class _ProfileState extends State<Profile> {
           ),
         ],
       ),
-      body: Center(child: BlankPage()),
+      body: SingleChildScrollView(
+          child: Center(child: BlankPage())
+      ),
       bottomNavigationBar: const BotNavBar(
         currentIndex: index,
       ),
